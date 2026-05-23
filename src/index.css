@@ -297,3 +297,97 @@ button {
   }
 }
 
+.scene-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: background 0.8s ease;
+}
+
+.scene-wrapper.light-off {
+  background: #030203;
+}
+
+.scene-wrapper.light-on {
+  background:
+    radial-gradient(circle at center, rgba(255, 209, 220, 0.12), transparent 45%),
+    #1f141c;
+}
+
+.room-switch {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 12px 14px 12px 18px;
+
+  background: rgba(10, 8, 10, 0.72);
+  color: #fff;
+  backdrop-filter: blur(14px);
+
+  cursor: pointer;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.switch-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.switch-track {
+  width: 54px;
+  height: 28px;
+  border-radius: 999px;
+  padding: 3px;
+  background: #555;
+  transition: background 0.25s ease;
+}
+
+.switch-thumb {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #eee;
+  transform: translateX(0);
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.room-switch.on .switch-track {
+  background: #ff8fb3;
+}
+
+.room-switch.on .switch-thumb {
+  transform: translateX(26px);
+  background: #fff3a6;
+  box-shadow: 0 0 18px rgba(255, 243, 166, 0.9);
+}
+
+.room-switch.off {
+  opacity: 0.82;
+}
+
+@media (max-width: 768px) {
+  .room-switch {
+    top: auto;
+    right: 50%;
+    bottom: 82px;
+    transform: translateX(50%);
+  }
+
+  .switch-label {
+    font-size: 11px;
+  }
+}
