@@ -398,7 +398,7 @@ function PartyPopper({ side = "left", triggerKey }) {
 /* -----------------------------
   실제 3D 장면
 ----------------------------- */
-function SceneContent({ onSelectMemory, isLightOn, fireworkKey }) {
+function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}) {
   return (
     <>
       <color attach="background" args={[isLightOn ? "#1f141c" : "#030203"]} />
@@ -433,21 +433,21 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey }) {
       <Floor isLightOn={isLightOn} />
       <Table />
 
-      {/* 스위치를 ON으로 누를 때마다 새 폭죽 생성 */}
-      {fireworkKey > 0 && (
-        <>
-          <PartyPopper
-            key={`left-${fireworkKey}`}
-            side="left"
-            triggerKey={fireworkKey}
-          />
-          <PartyPopper
-            key={`right-${fireworkKey}`}
-            side="right"
-            triggerKey={fireworkKey}
-          />
-        </>
-      )}
+     {/* LIGHT ON 순간에만 잠깐 보이는 폭죽 */}
+{showPartyPopper && (
+  <>
+    <PartyPopper
+      key={`left-${fireworkKey}`}
+      side="left"
+      triggerKey={fireworkKey}
+    />
+    <PartyPopper
+      key={`right-${fireworkKey}`}
+      side="right"
+      triggerKey={fireworkKey}
+    />
+  </>
+)}
 
       <MiniCandle
         position={[-1.15, -0.35, -0.35]}
@@ -552,18 +552,45 @@ function Scene3D({ onSelectMemory }) {
 
   const [isLightOn, setIsLightOn] = useState(false);
   const [fireworkKey, setFireworkKey] = useState(0);
+  const [showPartyPopper, setShowPartyPopper] = useState(false);
+  const partyTimerRef = useRef(null);
 
   const handleToggleLight = () => {
-    setIsLightOn((prev) => {
-      const next = !prev;
+  setIsLightOn((prev) => {
+    const next = !prev;
 
-      if (next) {
-        setFireworkKey((key) => key + 1);
-      }
+    // 기존 타이머 정리
+    if (partyTimerRef.current) {
+      clearTimeout(partyTimerRef.current);
+      partyTimerRef.current = null;
+    }
 
-      return next;
-    });
+    if (next) {
+      // LIGHT ON 순간에만 폭죽 시작
+      setFireworkKey((key) => key + 1);
+      setShowPartyPopper(true);
+
+      // 종이 파티클이 사라질 타이밍에 고깔도 함께 제거
+      partyTimerRef.current = setTimeout(() => {
+        setShowPartyPopper(false);
+        partyTimerRef.current = null;
+      }, 2000);
+    } else {
+      // LIGHT OFF 시 폭죽 즉시 제거
+      setShowPartyPopper(false);
+    }
+
+    return next;
+  });
+};
+
+useEffect(() => {
+  return () => {
+    if (partyTimerRef.current) {
+      clearTimeout(partyTimerRef.current);
+    }
   };
+}, []);
 
   return (
     <section className={`scene-wrapper ${isLightOn ? "light-on" : "light-off"}`}>
@@ -578,6 +605,7 @@ function Scene3D({ onSelectMemory }) {
           onSelectMemory={onSelectMemory}
           isLightOn={isLightOn}
           fireworkKey={fireworkKey}
+          showPartyPopper={showPartyPopper}
         />
       </Canvas>
 
