@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls, Text, useTexture  } from "@react-three/drei";
 
 /* -----------------------------
   기본 테이블
@@ -225,7 +225,14 @@ function GiftBox({ position, onClick }) {
 /* -----------------------------
   사진 액자
 ----------------------------- */
-function PhotoFrame({ position, rotation = [0, 0, 0], onClick }) {
+function PhotoFrame({
+  position,
+  rotation = [0, 0, 0],
+  imageUrl,
+  onClick,
+}) {
+  const photoTexture = imageUrl ? useTexture(imageUrl) : null;
+
   return (
     <group position={position} rotation={rotation} onClick={onClick}>
       {/* 액자 프레임 */}
@@ -235,10 +242,17 @@ function PhotoFrame({ position, rotation = [0, 0, 0], onClick }) {
       </mesh>
 
       {/* 사진 영역 */}
-      <mesh position={[0, 0, 0.05]}>
-        <boxGeometry args={[0.68, 0.45, 0.03]} />
-        <meshStandardMaterial color="#fffaf0" roughness={0.8} />
-      </mesh>
+      {photoTexture ? (
+        <mesh position={[0, 0, 0.055]}>
+          <planeGeometry args={[0.68, 0.45]} />
+          <meshStandardMaterial map={photoTexture} roughness={0.8} />
+        </mesh>
+      ) : (
+        <mesh position={[0, 0, 0.05]}>
+          <boxGeometry args={[0.68, 0.45, 0.03]} />
+          <meshStandardMaterial color="#fffaf0" roughness={0.8} />
+        </mesh>
+      )}
 
       {/* 받침대 */}
       <mesh position={[0, -0.42, -0.12]} rotation={[0.35, 0, 0]}>
@@ -248,7 +262,6 @@ function PhotoFrame({ position, rotation = [0, 0, 0], onClick }) {
     </group>
   );
 }
-
 /* -----------------------------
   편지
 ----------------------------- */
@@ -492,36 +505,48 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
       />
 
       <PhotoFrame
-        position={[-1.45, -0.05, 1.05]}
-        rotation={[0, 0.8, 0]}
-        onClick={() =>
-          onSelectMemory({
-            title: "첫 번째 추억",
-            content: "여기에 첫 만남이나 첫 데이트 사진 이야기를 넣으면 좋아.",
-          })
-        }
-      />
+  position={[-1.45, -0.05, 1.05]}
+  rotation={[0, 0.8, 0]}
+  imageUrl="/images/pic1.jpg"
+  onClick={() =>
+    onSelectMemory({
+      type: "photo",
+      title: "첫 번째 추억",
+      content: "이 사진을 볼 때마다 그날의 분위기가 다시 떠올라.",
+      image: "/images/pic1.jpg",
+    })
+  }
+/>
 
-      <PhotoFrame
-        position={[1.45, -0.05, -0.55]}
-        rotation={[0, -0.3, 0]}
-        onClick={() =>
-          onSelectMemory({
-            title: "두 번째 추억",
-            content: "함께 웃었던 날, 여행 갔던 날, 특별했던 순간을 적어보자.",
-          })
-        }
-      />
+<PhotoFrame
+  position={[1.45, -0.05, -0.55]}
+  rotation={[0, -0.3, 0]}
+  imageUrl="/images/pic2.jpg"
+  onClick={() =>
+    onSelectMemory({
+      type: "photo",
+      title: "두 번째 추억",
+      content: "별것 아닌 순간도 너와 함께라서 오래 기억에 남는 하루가 됐어.",
+      image: "/images/pic2.jpg",
+    })
+  }
+/>
 
       <Letter
-        position={[0.95, -0.38, 1.25]}
-        onClick={() =>
-          onSelectMemory({
-            title: "편지",
-            content: "Dear. 너에게 하고 싶었던 말을 여기에 담을 거야.",
-          })
-        }
-      />
+  position={[0.95, -0.38, 1.25]}
+  onClick={() =>
+    onSelectMemory({
+      type: "letter",
+      title: "너에게 쓰는 편지",
+      content:
+        "처음에는 이렇게까지 소중한 사람이 될 줄 몰랐는데,\n\n" +
+        "함께 보내는 시간이 하나씩 쌓일수록 내 하루 곳곳에 네가 있다는 걸 느껴.\n\n" +
+        "별것 아닌 대화도, 같이 웃던 순간도, 조용히 함께 걷던 시간도 전부 나에게는 오래 기억하고 싶은 장면들이야.\n\n" +
+        "이 작은 공간이 내 마음을 전부 대신할 수는 없겠지만, 그래도 오늘만큼은 너에게 조금 더 특별한 하루가 되었으면 좋겠어.\n\n" +
+        "1주년 축하해. 앞으로도 우리답게, 천천히 오래 함께하자.",
+    })
+  }
+/>
 
       {isLightOn && (
         <Text
