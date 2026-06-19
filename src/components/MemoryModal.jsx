@@ -27,11 +27,11 @@ function MemoryModal({ memory, onClose }) {
             <p className="letter-label">Letter</p>
             <h2>{memory.title}</h2>
 
-            <p className="letter-greeting">Dear. 너에게</p>
+            <p className="letter-greeting">Dear. 보화에게</p>
 
             <p className="letter-content">{memory.content}</p>
 
-            <p className="letter-sign">From. 나</p>
+            <p className="letter-sign">From. 근차니❤️</p>
 
             <button onClick={onClose}>닫기</button>
           </div>

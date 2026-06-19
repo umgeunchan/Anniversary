@@ -468,7 +468,7 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
         onClick={() =>
           onSelectMemory({
             title: "작은 촛불",
-            content: "마치 이 작은 불빛처럼, 우리 추억도 따뜻하게 남았으면 좋겠어.",
+            content: "마치 이 작은 불빛처럼, 우리 추억도 따뜻하게 남았으면 좋겠어!",
           })
         }
       />
@@ -479,7 +479,7 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
         onClick={() =>
           onSelectMemory({
             title: "작은 촛불",
-            content: "오늘의 이 순간을 항상 기억하고 싶어.",
+            content: "오늘의 이 순간을 항상 기억하고 싶어!",
           })
         }
       />
@@ -489,7 +489,7 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
         onClick={() =>
           onSelectMemory({
             title: "작은 선물",
-            content: "아직 열어보지 않은 앞으로의 추억들을 너와 함께 만들고 싶어.",
+            content: "아직 열어보지 않은 앞으로의 추억들을 너와 함께 만들고 싶어",
           })
         }
       />
@@ -511,8 +511,8 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
   onClick={() =>
     onSelectMemory({
       type: "photo",
-      title: "첫 번째 추억",
-      content: "이 사진을 볼 때마다 그날의 분위기가 다시 떠올라.",
+      title: "이때 기억나?",
+      content: "벚꽃보러 갔을 때 너가 정말 너무 예뻐서 기억난다.\n그때 사진도 정말 많이 찍었지만 내 눈에 담은 네 모습이 아직도 선명한 것 같아. \n 우리 앞으로도 같이 사진 많이 찍으면서 예쁜 추억 많이 만들어가자!",
       image: "/images/pic1.jpg",
     })
   }
@@ -525,8 +525,8 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
   onClick={() =>
     onSelectMemory({
       type: "photo",
-      title: "두 번째 추억",
-      content: "별것 아닌 순간도 너와 함께라서 오래 기억에 남는 하루가 됐어.",
+      title: "첫 눈 왔을 때!!",
+      content: "이때 기억나? 나 시험공부 한다고 카페에서 같이 있다가 저녁 먹으러 나오니까 눈이 엄청 많이 왔잖아! 그때 너랑 같이 눈 맞으면서 걸었던 거 아직도 기억난다🤣 올해 첫 눈도 나랑 같이 봐줘~~!",
       image: "/images/pic2.jpg",
     })
   }
@@ -537,13 +537,19 @@ function SceneContent({ onSelectMemory, isLightOn, fireworkKey, showPartyPopper}
   onClick={() =>
     onSelectMemory({
       type: "letter",
-      title: "너에게 쓰는 편지",
+      title: "사랑하는 우리 보화",
       content:
-        "처음에는 이렇게까지 소중한 사람이 될 줄 몰랐는데,\n\n" +
-        "함께 보내는 시간이 하나씩 쌓일수록 내 하루 곳곳에 네가 있다는 걸 느껴.\n\n" +
-        "별것 아닌 대화도, 같이 웃던 순간도, 조용히 함께 걷던 시간도 전부 나에게는 오래 기억하고 싶은 장면들이야.\n\n" +
-        "이 작은 공간이 내 마음을 전부 대신할 수는 없겠지만, 그래도 오늘만큼은 너에게 조금 더 특별한 하루가 되었으면 좋겠어.\n\n" +
-        "1주년 축하해. 앞으로도 우리답게, 천천히 오래 함께하자.",
+        "1주년 축하해 보화야!!\n\n" +
+        "처음에는 우리가 서로에게 이렇게까지 소중한 사람이 될 줄 몰랐는데,\n" +
+        "우리가 함께 보내는 시간이 조금씩 쌓이면 쌓일수록 내 삶에 네가 틈틈히 박혀있다는게 느껴지는 것 같아!\n" +
+        "별것 아닌 대화도, 같이 웃던 순간도, 조용히 함께 있던 시간도 전부 나에게는 오래 간직하고 싶은 기억들이야.\n" +
+        "내가 만든 이 작은 공간이 내 마음을 전부 대신할 수는 없겠지만, 그래도 오늘만큼은 너에게 조금 더 특별한 하루가 되었으면 좋겠어!\n\n" +
+        "우리 다투기도 많이 다투고, 서로에게 서운한 기억도 많았지\n" +
+        "하지만 그 과정이 있었기에 그만큼 우리가 더 서로를 깊이 이해할 수 있었고, 그만큼 더 사랑하게 된 것 같아.\n" +
+        "너랑 함께하는 시간이 너무 행복하고 즐거워서 1년이라는 시간이 가는줄도 몰랐어\n\n" +
+        "보고싶은거 기다리느라 힘들었지. 내가 만드는거 궁금한데 참고 기다려줘서 고마워!\n\n" +
+        "나랑 앞으로 2주년,3주년, 100주년까지 같이 있어줘 😍\n" +
+        "1주년 축하해! 앞으로도 우리 평생 함께하자! 사랑해❤",
     })
   }
 />
